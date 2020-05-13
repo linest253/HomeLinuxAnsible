@@ -1,0 +1,22 @@
+---
+- hosts: DEB
+  remote_user: linest
+  gather_facts: "no"
+  become: "yes"
+  tasks:
+  - name: Install Patches on Debian-based systems
+    apt:
+      upgrade: "yes"
+      update_cache: "yes"
+      allow_unauthenticated: "yes"
+
+- hosts: RH
+  remote_user: linest
+  gather_facts: "no"
+  become: "yes"
+  tasks:
+  - name: Install Patches on RHEL-based systems
+    yum:
+      name: "*"
+      state: latest
+      skip_broken: "yes"

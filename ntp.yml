@@ -1,0 +1,36 @@
+---
+- hosts: DEB
+  remote_user: linest
+  gather_facts: "false"
+  become: yes
+  tasks:
+  - name: Install ntp on Debian-based systems
+    apt:
+      name: ntp 
+      state: present
+  - name: Ensure ntp is running
+    service: name=ntp state=started enabled=yes
+
+- hosts: RH7
+  remote_user: linest
+  gather_facts: "false"
+  become: yes
+  tasks:
+  - name: Install ntp on RHEL7-based systems
+    yum:
+      name: ntp 
+      state: present
+  - name: Ensure ntp is running
+    service: name=ntpd state=started enabled=yes
+
+- hosts: RH8
+  remote_user: linest
+  gather_facts: "false"
+  become: yes
+  tasks:
+  - name: Install chrony on RHEL8-based systems
+    yum:
+      name: chrony
+      state: present
+  - name: Ensure chronyd is running
+    service: name=chronyd state=started enabled=yes
